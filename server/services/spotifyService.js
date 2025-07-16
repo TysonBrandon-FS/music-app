@@ -3,7 +3,6 @@ const config = require('../config');
 
 const SPOTIFY_API_BASE = 'https://api.spotify.com/v1';
 
-// Get access token from Spotify
 async function getAccessToken() {
   try {
     const response = await axios.post('https://accounts.spotify.com/api/token', 
@@ -22,7 +21,6 @@ async function getAccessToken() {
   }
 }
 
-//
 async function spotifyRequest(endpoint) {
   try {
     const token = await getAccessToken();

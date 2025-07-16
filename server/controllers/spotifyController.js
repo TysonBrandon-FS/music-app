@@ -6,6 +6,7 @@ async function getArtists(req, res) {
     if (!q) {
       return res.status(400).json({ error: 'Query parameter "q" is required' });
     }
+    
     const data = await spotifyService.spotifyRequest(`/search?q=${encodeURIComponent(q)}&type=artist&limit=20`);
     res.json(data.artists);
   } catch (error) {
@@ -19,6 +20,7 @@ async function getSongs(req, res) {
     if (!q) {
       return res.status(400).json({ error: 'Query parameter "q" is required' });
     }
+    
     const data = await spotifyService.spotifyRequest(`/search?q=${encodeURIComponent(q)}&type=track&limit=20`);
     res.json(data.tracks);
   } catch (error) {
@@ -32,6 +34,7 @@ async function getAlbums(req, res) {
     if (!q) {
       return res.status(400).json({ error: 'Query parameter "q" is required' });
     }
+    
     const data = await spotifyService.spotifyRequest(`/search?q=${encodeURIComponent(q)}&type=album&limit=20`);
     res.json(data.albums);
   } catch (error) {
