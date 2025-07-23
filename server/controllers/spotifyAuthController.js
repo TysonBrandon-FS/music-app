@@ -5,7 +5,7 @@ const User = require('../models/User');
 function generateJWT(userId) {
     return jwt.sign(
         { userId },
-        process.env.ACCESS_TOKEN_SECRET || 'your-secret-key',
+        process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: '7d' }
     );
 }
