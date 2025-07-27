@@ -7,7 +7,9 @@ function getAuthUrl() {
     const params = new URLSearchParams({
         client_id: process.env.CLIENT_ID,
         response_type: 'code',
-        redirect_uri: process.env.REDIRECT_URI || 'http://localhost:3001/callback',
+        redirect_uri: 'http://localhost:3001/api/auth/callback',
+        scope: 'user-read-private user-read-email user-top-read user-read-recently-played playlist-read-private playlist-modify-public playlist-modify-private',
+        show_dialog: true
     });
 
     return `${SPOTIFY_AUTH_URL}?${params.toString()}`;
@@ -19,7 +21,7 @@ async function exchangeCodeForTokens(code) {
             new URLSearchParams({
                 grant_type: 'authorization_code',
                 code: code,
-                redirect_uri: process.env.REDIRECT_URI || 'http://localhost:3001/callback'
+                redirect_uri: 'http://localhost:3001/api/auth/callback'
             }),
             {
                 headers: {

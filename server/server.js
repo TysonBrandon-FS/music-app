@@ -16,9 +16,9 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 
-app.get('/api/artists', spotifyController.getArtists);
-app.get('/api/songs', spotifyController.getSongs);
-app.get('/api/albums', spotifyController.getAlbums);
+app.post('/api/artists', spotifyController.getArtists);
+app.post('/api/songs', spotifyController.getSongs);
+app.post('/api/albums', spotifyController.getAlbums);
 app.get('/api/artists/:id', spotifyController.getArtistById);
 app.get('/api/albums/:id', spotifyController.getAlbumById);
 app.get('/api/songs/:id', spotifyController.getSongById);

@@ -5,7 +5,7 @@ const User = require('../models/User');
 function generateJWT(userId) {
     return jwt.sign(
         { userId },
-        process.env.ACCESS_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET || 'your-secret-key',
         { expiresIn: '7d' }
     );
 }
@@ -49,20 +49,14 @@ async function handleCallback(req, res) {
 
         const jwtToken = generateJWT(user._id);
         
-        res.json({ 
-            message: 'Spotify authentication successful',
-            token: jwtToken,
-            user: {
-                id: user._id,
-                spotifyId: user.spotifyId,
-                displayName: user.displayName,
-                email: user.email
-            }
-        });
+        // Redirect to React app with token and user data
+        const redirectUrl = `http://localhost:3000/?token=${jwtToken}&userId=${user._id}&displayName=${encodeURIComponent(user.displayName)}`;
+        res.redirect(redirectUrl);
         
     } catch (error) {
         console.error('Callback error:', error.message);
-        res.status(500).json({ error: 'Authentication failed' });
+        // Redirect to login page with error
+        res.redirect('http://localhost:3000/login?error=auth_failed');
     }
 }
 
